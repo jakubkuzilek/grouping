@@ -6,11 +6,13 @@
 #' @details
 #' GroupAlgorithm is basic (maternal) R6 class for creating student groupings. It
 #' does not implement any grouping algorithm, but it implements helper
-#' functionalities and proper behavior.
+#' functionalities and proper behavior. This class should be used as a template
+#' for creating new Algorithm class inheriting from this one.
 #'
 #' @export
 GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 
+                              # private variables
                               private = list(
                                 .name = "Grouping Algorithm",
                                 .features = NULL,
@@ -20,6 +22,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                 .result = NULL
                               ),
 
+                              # getters and setters
                               active = list(
 
                                 #' @field features data.frame containing the grouping data
@@ -74,6 +77,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                 }
                               ),
 
+                              # public functions
                               public = list(
 
                                 #' @description
