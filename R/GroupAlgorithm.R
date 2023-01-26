@@ -12,10 +12,12 @@
 GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 
                               private = list(
+                                .name = "Grouping Algorithm",
                                 .features = NULL,
                                 .parameters = NULL,
                                 .upper_bound = NULL,
-                                .lower_bound = NULL
+                                .lower_bound = NULL,
+                                .result = NULL
                               ),
 
                               active = list(
@@ -60,6 +62,15 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                     }
                                     self
                                   }
+                                },
+
+                                #' @field result vector containing assignment of each student to group
+                                result = function(value) {
+                                  if(missing(value)) {
+                                    private$.result
+                                  } else {
+                                    warning("Result cannot be manually assigned. Ignoring input.")
+                                  }
                                 }
                               ),
 
@@ -96,34 +107,33 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 
                                 },
 
-                                #TODO: rework print function
                                 #' @description
                                 #' Print the information about the model.
                                 #' @param ... dots for compatibility reasons
                                 #' @return invisible self
                                 print = function(...) {
-                                  cat("Grouping algoritm: ", class(self)[1],"\n", sep = "")
-                                  cat("--------------------------------------------------\n")
-                                  object_names <- ls(private,all.names = TRUE)
-                                  values <- vapply(object_names, function(name) {
-                                    obj <- .subset2(private, name)
-                                    if (is.function(obj)) "NA"
-                                    else if (is.null(obj)) "NA"
-                                    else if (is.atomic(obj)) {
-                                      txt <- as.character(utils::head(obj, 60))
-                                      txt <- paste(txt, collapse = ", ")
-                                      trimws(txt)
-                                    }
-                                    else paste(class(obj), collapse = "")
+                                  cat("Grouping algoritm: ", private$.name,"\n", sep = "")
+                                  cat("==================================================\n")
+                                  cat("Features:\n")
+                                  cat("---------\n")
+                                  str(private$.features)
+                                  cat("\n")
+                                  cat("Parameters:\n")
+                                  cat("-----------\n")
+                                  str(private$.parameters)
+                                  cat("\n")
+                                  cat("Bounds:\n")
+                                  cat("-------\n")
+                                  cat("lower: ",private$.lower_bound,"\n", sep= "")
+                                  cat("upper: ",private$.upper_bound,"\n", sep= "")
+                                  cat("\n")
+                                  cat("Result:\n")
+                                  cat("-------\n")
+                                  if(is.null(private$.result)) {
+                                    cat("Result unknown: to trigger computation use group(<this object>).")
+                                  } else {
+                                    cat(as.character(private$.features))
                                   }
-                                  , FUN.VALUE = character(1))
-
-                                  object_names <- gsub("\\.","",object_names)
-
-                                  cat(
-                                    paste0(object_names[values != "NA"],": ",
-                                           values[values != "NA"],"\n"),
-                                    sep="")
 
                                   invisible(self)
                                 },
@@ -134,4 +144,19 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                 group = function() {
                                   stop("You cannot call group on GroupAlgorithm object!")
                                 }
-                              ))
+                              )
+)
+
+#' Constructor function for GroupAlgorithm R6 class.
+#'
+#' @description Creates GroupAlgorithm object.
+#' @param features data.frame containing the grouping data
+#' @param parameters list containing algorithm parameters
+#' @param bounds num scalar or vector of 2 elements with bounds
+#'
+#' @return GroupAlgorithm object.
+#'
+#' @export
+group_algorithm <- function(features, parameters, bounds) {
+  GroupAlgorithm$new(features, parameters, bounds)
+}

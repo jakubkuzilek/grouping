@@ -19,6 +19,8 @@ functionalities and proper behavior.
 \item{\code{parameters}}{list containing algorithm parameters}
 
 \item{\code{bounds}}{num scalar or vector of 2 elements with bounds}
+
+\item{\code{result}}{vector containing assignment of each student to group}
 }
 \if{html}{\out{</div>}}
 }
