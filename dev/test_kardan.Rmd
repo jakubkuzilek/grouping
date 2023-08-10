@@ -1,0 +1,61 @@
+---
+title: "Grouping test - Kardan"
+output: html_notebook
+---
+
+# Init
+```{r}
+library(magrittr)
+library(tibble)
+library(readr)
+library(tidyverse)
+```
+
+# Read data
+```{r}
+features <- 
+  read_csv("../raw_data/features.csv")
+
+homogeneous <- names(features)[1:10]
+heterogeneous <- names(features)[11:22]
+
+preferences <- 
+  matrix(0, nrow = nrow(features), ncol = nrow(features))
+
+weight_hom <- 0.5
+weight_het <- 0.5
+
+attr_weight_hom <- c(1,1,2,3,3,3,3,2,2,2)
+attr_weight_hom <- attr_weight_hom/sum(attr_weight_hom)
+attr_weight_het <- c(3,3,3,3,3,3,3,3,2,2,1,2)
+attr_weight_het <- attr_weight_het/sum(attr_weight_het)
+
+weight_att <- 1
+weigth_pref <- 0
+
+group_bounds <- c(3L,6L)
+```
+
+# Grouping
+```{r}
+model <-
+  kardan_algorithm(features = features,
+                   preferences = preferences,
+                   parameters = 
+                     list(homogeneous = homogeneous,
+                          heterogeneous = heterogeneous,
+                          w_homogeneous = attr_weight_hom,
+                          w_heterogeneous = attr_weight_het,
+                          weight_hom = weight_hom,
+                          weight_het = weight_het,
+                          weight_features = weight_att,
+                          weight_preferences = weigth_pref
+                     ),
+                   bounds = group_bounds)
+
+model$group()
+
+model$result
+
+model
+```

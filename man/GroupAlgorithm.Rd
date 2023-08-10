@@ -9,7 +9,10 @@ GroupAlgorithm is basic (maternal) R6 class for creating student groupings.
 \details{
 GroupAlgorithm is basic (maternal) R6 class for creating student groupings. It
 does not implement any grouping algorithm, but it implements helper
-functionalities and proper behavior.
+functionalities and proper behavior. This class should be used as a template
+for creating new Algorithm class inheriting from this one.
+
+All methods constructors should be ending with "_algorithm".
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -29,6 +32,7 @@ functionalities and proper behavior.
 \itemize{
 \item \href{#method-GroupAlgorithm-new}{\code{GroupAlgorithm$new()}}
 \item \href{#method-GroupAlgorithm-print}{\code{GroupAlgorithm$print()}}
+\item \href{#method-GroupAlgorithm-get_required_parameters}{\code{GroupAlgorithm$get_required_parameters()}}
 \item \href{#method-GroupAlgorithm-group}{\code{GroupAlgorithm$group()}}
 \item \href{#method-GroupAlgorithm-clone}{\code{GroupAlgorithm$clone()}}
 }
@@ -37,9 +41,9 @@ functionalities and proper behavior.
 \if{html}{\out{<a id="method-GroupAlgorithm-new"></a>}}
 \if{latex}{\out{\hypertarget{method-GroupAlgorithm-new}{}}}
 \subsection{Method \code{new()}}{
-Create new GroupAlgorithm object
+Create new object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$new(features, parameters, bounds)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$new(features, parameters = NULL, param_requirements, bounds)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -49,19 +53,21 @@ Create new GroupAlgorithm object
 
 \item{\code{parameters}}{list containing algorithm configuration}
 
+\item{\code{param_requirements}}{list containing all required parameters and possible values}
+
 \item{\code{bounds}}{num scalar or vector of 2 elements with group bounds}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A new `GroupAlgorithm` object
+A new object
 }
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-GroupAlgorithm-print"></a>}}
 \if{latex}{\out{\hypertarget{method-GroupAlgorithm-print}{}}}
 \subsection{Method \code{print()}}{
-Print the information about the model.
+Print the information about the algorithm.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$print(...)}\if{html}{\out{</div>}}
 }
@@ -73,6 +79,19 @@ Print the information about the model.
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Returns}{
+invisible self
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-GroupAlgorithm-get_required_parameters"></a>}}
+\if{latex}{\out{\hypertarget{method-GroupAlgorithm-get_required_parameters}{}}}
+\subsection{Method \code{get_required_parameters()}}{
+Prints out required parameters and their specification
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$get_required_parameters()}\if{html}{\out{</div>}}
+}
+
 \subsection{Returns}{
 invisible self
 }

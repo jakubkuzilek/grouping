@@ -8,7 +8,13 @@ Description: More about what it does (maybe more than one line) Use four
     spaces when indenting paragraphs within the Description.
 License: MIT + file LICENSE
 Imports: 
-    R6
+    dplyr,
+    ompr,
+    ompr.roi,
+    R6,
+    ROI.plugin.glpk,
+    tibble,
+    tidyr
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
