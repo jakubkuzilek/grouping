@@ -94,6 +94,11 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      stop("Sum of weight of homogeneous features and weight of heterogeneous features needs to sum to 1.")
                                    }
 
+                                   if(is.null(private$.preferences)) {
+                                     parameters$weight_features <- 1
+                                     parameters$weight_preferences <- 0
+                                   }
+
                                    if(any(parameters$weight_features > 1 | parameters$weight_features < 0)) {
                                      stop("Weight of homogeneous features is out of bounds <0,1>.")
                                    }
@@ -210,10 +215,15 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                    c <- weight_hom*c_hom + weight_het*c_het
 
                                    # preferences
-                                   c_pref <- private$.compute_preferences(preferences)
+                                   if(!is.null(preferences)) {
+                                    c_pref <- private$.compute_preferences(preferences)
 
-                                   # compatibility and preferences combined
-                                   c_tot <- weight_attributes*c + weight_preferences*c_pref
+                                    # compatibility and preferences combined
+                                    c_tot <- weight_attributes*c + weight_preferences*c_pref
+                                   } else {
+                                     # compatibility is equal only to the partial compatibilities combination
+                                     c_tot <- c
+                                   }
 
                                    # set diagonal to 1 (student needs to be with himself in the group)
                                    diag(c_tot) <- 1
@@ -229,7 +239,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                    if(missing(value)) {
                                      private$.preferences
                                    } else {
-                                     stopifnot(is.matrix(value),
+                                     stopifnot(is.matrix(value) | is.null(value),
                                                ncol(value) == nrow(private$.features),
                                                nrow(value) == nrow(private$.features))
                                      private$.preferences <- value
@@ -259,7 +269,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                                     param_requirements,
                                                     bounds)
 
-                                   stopifnot(is.matrix(preferences),
+                                   stopifnot(is.matrix(preferences) | is.null(preferences),
                                              ncol(preferences) == nrow(private$.features),
                                              nrow(preferences) == nrow(private$.features))
                                    private$.preferences <- preferences
@@ -379,7 +389,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
 #' @export
 kardan_algorithm <- function(features, preferences, parameters, bounds) {
   KardanAlgorithm$new(features,
-                      preferences,
+                      preferences = NULL,
                       parameters,
                       .kardan_algorithm_param_requirements,
                       bounds)

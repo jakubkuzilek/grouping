@@ -40,7 +40,7 @@ group_bounds <- c(3L,6L)
 ```{r}
 model <-
   kardan_algorithm(features = features,
-                   preferences = preferences,
+                   preferences = NULL,
                    parameters = 
                      list(homogeneous = homogeneous,
                           heterogeneous = heterogeneous,
