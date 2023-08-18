@@ -8,4 +8,5 @@
 #' @importFrom ompr.roi with_ROI
 #' @importFrom tibble as_tibble
 #' @importFrom tidyr pivot_wider
+#' @import magrittr
 NULL

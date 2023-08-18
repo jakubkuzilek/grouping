@@ -5,7 +5,10 @@
 #' @return vector
 #' @export
 get_available_algorithms = function(){
-  lst_function <- ls("package:grouping")
+  lst_function <-
+    ls("package:grouping") %>%
+    .[grepl("_algorithm$",.)] %>%
+    .[!grepl("^group",.)]
 
-  lst_function[grepl("_algorithm$",lst_function)]
+  lst_function
 }
