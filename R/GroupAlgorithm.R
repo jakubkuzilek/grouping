@@ -75,7 +75,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                   } else {
                                     stopifnot(is.null(value) | is.list(value))
                                     private$.check_params(value,
-                                                          private$.param_requirements)
+                                                          private$.param_requirements$params)
                                     private$.parameters <- value
                                     self
                                   }
@@ -134,7 +134,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 
                                   stopifnot(is.null(parameters) | is.list(parameters))
                                   private$.check_params(parameters,
-                                                        private$.param_requirements)
+                                                        private$.param_requirements$params)
                                   private$.parameters <- parameters
 
                                   stopifnot(is.numeric(bounds),
@@ -201,7 +201,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 
 .group_algorithm_param_requirements <-
   list()
-#EXAMPLE
+# EXAMPLE
   # list(
   #   param1 = list(val = c(0,1), desc = "This is param1")),
   #   param2 = list(val = c("A","B","C"), desc = "This is param2")),

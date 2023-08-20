@@ -47,7 +47,9 @@ RandomAlgorithm <- R6::R6Class(classname = "RandomAlgorithm",
 )
 
 .random_algorithm_param_requirements <-
-  list()
+  list(desc = "RandomAlgorithm is very simple (example) algorithm for creating the groups.",
+       data = list(features = "Data.frame (table) containing the grouping data features (numeric values only). nrows is number of students"),
+       params = list())
 
 #' Constructor function for RandomAlgorithm R6 class.
 #'

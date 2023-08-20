@@ -366,15 +366,23 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
 )
 
 .kardan_algorithm_param_requirements <-
-  list(homogeneous = list(val = character(0), desc = "String vector of homogeneous feature names. length(homogeneous) + length(heterogenous) = ncol(features)"),
-       heterogeneous = list(val = character(0), desc = "String vector of heterogeneous feature names. length(homogeneous) + length(heterogenous) = ncol(features)"),
-       w_homogeneous = list(val = numeric(0), desc = "Numeric vector of homogeneous feature weights towards grouping. Values in <0,1>. length(w_homogeneous) = length(homogeneous)"),
-       w_heterogeneous = list(val = numeric(0), desc = "Numeric vector of heterogeneous feature weights towards grouping. Values in <0,1>. length(w_heterogeneous) = length(heterogeneous)"),
-       weight_hom = list(val = c(0,1), desc = "Numeric value of weight of sum of all homogeneous features. Value in <0,1>"),
-       weight_het = list(val = c(0,1), desc = "Numeric value of weight of sum of all heterogeneous features. Value in <0,1>"),
-       weight_features = list(val = c(0,1), desc = "Numeric value of weight of features in final compatibility. Value in <0,1>"),
-       weight_preferences = list(val = c(0,1), desc = "Numeric value of weight of preferences in final compatibility. Value in <0,1>")
-       )
+  list(desc = "KardanAlgorithm is the grouping model developed by Kardan et. al. based on homogeneous
+  and heterogeneous attributes, student preferences. The model computes compatibility
+  measure and then performs the mathematical modeling (long-step simplex optimization).
+  Fairness is guaranteed by initial step, which checks the convergence to solution.
+  The algorithm is not suitable for large groups of students (> 100). The algorithm
+  is implemented without fairness step.",
+       data = list(features = "Data.frame (table) containing the grouping data features (numeric values only). nrows is number of students",
+                   preferences = "Matrix containing student preferences. Value in <0,1>. dim(preferences) = nrows(features)"),
+       params = list(homogeneous = list(val = character(0), desc = "String vector of homogeneous feature names. length(homogeneous) + length(heterogenous) = ncol(features)"),
+                     heterogeneous = list(val = character(0), desc = "String vector of heterogeneous feature names. length(homogeneous) + length(heterogenous) = ncol(features)"),
+                     w_homogeneous = list(val = c(0,1), desc = "Numeric vector of homogeneous feature weights towards grouping. Values in <0,1>. length(w_homogeneous) = length(homogeneous)"),
+                     w_heterogeneous = list(val = c(0,1), desc = "Numeric vector of heterogeneous feature weights towards grouping. Values in <0,1>. length(w_heterogeneous) = length(heterogeneous)"),
+                     weight_hom = list(val = c(0,1), desc = "Numeric value of weight of sum of all homogeneous features. Value in <0,1>"),
+                     weight_het = list(val = c(0,1), desc = "Numeric value of weight of sum of all heterogeneous features. Value in <0,1>"),
+                     weight_features = list(val = c(0,1), desc = "Numeric value of weight of features in final compatibility. Value in <0,1>"),
+                     weight_preferences = list(val = c(0,1), desc = "Numeric value of weight of preferences in final compatibility. Value in <0,1>")
+       ))
 
 #' Constructor function for KardanAlgorithm R6 class.
 #'
