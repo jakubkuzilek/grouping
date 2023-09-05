@@ -130,11 +130,11 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      # create matrix with the same row multiple times
                                      matrix(r, ncol = length(r), nrow = dim(m)[1], byrow=T) %>%
                                        # subtract all other person features
-                                       subtract(m) %>%
+                                       magrittr::subtract(m) %>%
                                        # absolute value
                                        abs() %>%
                                        # multiply by weights of features
-                                       multiply_by(matrix(w, ncol = length(r), nrow = dim(m)[1], byrow = T)) %>%
+                                       magrittr::multiply_by(matrix(w, ncol = length(r), nrow = dim(m)[1], byrow = T)) %>%
                                        # summarise over all features
                                        apply(1, sum)
                                    }
@@ -157,15 +157,15 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      #create matrix with the same row multiple times
                                      matrix(r, ncol = length(r), nrow = dim(m)[1], byrow=T) %>%
                                        # subtract all other person features
-                                       subtract(m) %>%
+                                       magrittr::subtract(m) %>%
                                        # absolute values
                                        abs() %>%
                                        # multiply by weights of features
-                                       multiply_by(matrix(w, ncol = length(r), nrow = dim(m)[1], byrow = T)) %>%
+                                       magrittr::multiply_by(matrix(w, ncol = length(r), nrow = dim(m)[1], byrow = T)) %>%
                                        # summarise over all features
                                        apply(1, sum) %>%
                                        # subtract the value from 1
-                                       subtract(1, .)
+                                       magrittr::subtract(1, .)
                                    }
 
                                    # transform to matrix and normalize
@@ -349,7 +349,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      dplyr::filter(val == 1) %>%
                                      dplyr::arrange(id, group_member) %>%
                                      dplyr::group_by(id) %>%
-                                     dplyr::summarise(group_members = str_c(group_member, collapse = ",")) %>%
+                                     dplyr::summarise(group_members = stringr::str_c(group_member, collapse = ",")) %>%
                                      dplyr::ungroup() %>%
                                      dplyr::select(group_members) %>%
                                      dplyr::distinct() %>%
@@ -358,7 +358,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      dplyr::select(group_id, group_members) %>%
                                      dplyr::mutate(group_members = as.numeric(group_members)) %>%
                                      dplyr::arrange(group_members) %>%
-                                     extract2("group_id")
+                                     magrittr::extract2("group_id")
 
                                    invisible(self)
                                  }
