@@ -233,7 +233,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 #'
 #' @description Creates GroupAlgorithm object.
 #' @param features data.frame containing the grouping data
-#' @param preferencds matrix of preferences [NOT USED]
+#' @param preferences matrix of preferences [NOT USED]
 #' @param parameters list containing algorithm parameters
 #' @param bounds num scalar or vector of 2 elements with bounds
 #'

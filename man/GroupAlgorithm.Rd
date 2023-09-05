@@ -59,6 +59,8 @@ Create new object
 \describe{
 \item{\code{features}}{data.frame containing grouping data}
 
+\item{\code{preferences}}{matrix of student preferences between 0 and 1}
+
 \item{\code{parameters}}{list containing algorithm configuration}
 
 \item{\code{param_requirements}}{list containing all required parameters and possible values}

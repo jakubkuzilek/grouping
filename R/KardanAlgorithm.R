@@ -285,7 +285,7 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                      ompr::add_constraint(x[i,j] == x[j,i], i = 1:n, j = 1:n)
 
                                    # solve
-                                   result <- ompr::solve_model(model, ompr.roi::with_ROI(solver = "glpk", verbose = TRUE))
+                                   result <- ompr::solve_model(model, ompr.roi::with_ROI(solver = "glpk", verbose = FALSE))
 
                                    # extract matchings
                                    matching <- result %>%
