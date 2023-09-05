@@ -4,7 +4,7 @@
 \alias{kardan_algorithm}
 \title{Constructor function for KardanAlgorithm R6 class.}
 \usage{
-kardan_algorithm(features, preferences, parameters, bounds)
+kardan_algorithm(features, preferences = NULL, parameters, bounds)
 }
 \arguments{
 \item{features}{data.frame containing the grouping data}

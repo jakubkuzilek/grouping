@@ -24,7 +24,6 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                # private variables
                                private = list(
                                  .name = "Kardan Algorithm",
-                                 .preferences = NULL,
                                  .compatibility = NULL,
 
                                  # check algorithm params
@@ -232,49 +231,8 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
                                  }
                                ),
 
-                               active = list(
-
-                                 #' @field preferences num matrix containing the preferences data
-                                 preferences = function(value) {
-                                   if(missing(value)) {
-                                     private$.preferences
-                                   } else {
-                                     stopifnot(is.matrix(value) | is.null(value),
-                                               ncol(value) == nrow(private$.features),
-                                               nrow(value) == nrow(private$.features))
-                                     private$.preferences <- value
-                                     self
-                                   }
-                                 }
-                               ),
-
                                # public functions
                                public = list(
-                                 #' @description
-                                 #' Create new object
-                                 #' @param features data.frame containing grouping data
-                                 #' @param preferences matrix containing student preferences
-                                 #' @param parameters list containing algorithm configuration
-                                 #' @param param_requirements list containing all required parameters and possible values
-                                 #' @param bounds num scalar or vector of 2 elements with group bounds
-                                 #'
-                                 #' @return A new object
-                                 initialize = function(features,
-                                                       preferences,
-                                                       parameters = NULL,
-                                                       param_requirements,
-                                                       bounds) {
-                                   super$initialize(features,
-                                                    parameters,
-                                                    param_requirements,
-                                                    bounds)
-
-                                   stopifnot(is.matrix(preferences) | is.null(preferences),
-                                             ncol(preferences) == nrow(private$.features),
-                                             nrow(preferences) == nrow(private$.features))
-                                   private$.preferences <- preferences
-                                 },
-
                                  #' @description
                                  #' Perform grouping of students.
                                  #' @return invisible self
@@ -395,9 +353,9 @@ KardanAlgorithm <- R6::R6Class(classname = "KardanAlgorithm",
 #' @return KardanAlgorithm object.
 #'
 #' @export
-kardan_algorithm <- function(features, preferences, parameters, bounds) {
+kardan_algorithm <- function(features, preferences = NULL, parameters, bounds) {
   KardanAlgorithm$new(features,
-                      preferences = NULL,
+                      preferences,
                       parameters,
                       .kardan_algorithm_param_requirements,
                       bounds)

@@ -19,6 +19,8 @@ All methods constructors should be ending with "_algorithm".
 \describe{
 \item{\code{features}}{data.frame containing the grouping data}
 
+\item{\code{preferences}}{num matrix containing the preferences data}
+
 \item{\code{parameters}}{list containing algorithm parameters}
 
 \item{\code{bounds}}{num scalar or vector of 2 elements with bounds}
@@ -43,7 +45,13 @@ All methods constructors should be ending with "_algorithm".
 \subsection{Method \code{new()}}{
 Create new object
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$new(features, parameters = NULL, param_requirements, bounds)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{GroupAlgorithm$new(
+  features,
+  preferences,
+  parameters = NULL,
+  param_requirements,
+  bounds
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

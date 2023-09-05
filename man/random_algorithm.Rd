@@ -4,10 +4,12 @@
 \alias{random_algorithm}
 \title{Constructor function for RandomAlgorithm R6 class.}
 \usage{
-random_algorithm(features, parameters, bounds)
+random_algorithm(features, preferences = NULL, parameters, bounds)
 }
 \arguments{
 \item{features}{data.frame containing the grouping data}
+
+\item{preferences}{matrix of preferences [NOT USED]}
 
 \item{parameters}{list containing algorithm parameters}
 

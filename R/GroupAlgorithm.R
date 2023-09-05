@@ -18,6 +18,7 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                               private = list(
                                 .name = "Grouping Algorithm",
                                 .features = NULL,
+                                .preferences = NULL,
                                 .parameters = NULL,
                                 .param_requirements = NULL,
                                 .upper_bound = NULL,
@@ -64,6 +65,19 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                               ncol(value) > 1,
                                               nrow(value) > 1)
                                     private$.features <- value
+                                    self
+                                  }
+                                },
+
+                                #' @field preferences num matrix containing the preferences data
+                                preferences = function(value) {
+                                  if(missing(value)) {
+                                    private$.preferences
+                                  } else {
+                                    stopifnot(is.matrix(value) | is.null(value),
+                                              ncol(value) == nrow(private$.features),
+                                              nrow(value) == nrow(private$.features))
+                                    private$.preferences <- value
                                     self
                                   }
                                 },
@@ -115,12 +129,14 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                 #' @description
                                 #' Create new object
                                 #' @param features data.frame containing grouping data
+                                #' @param preferences matrix of student preferences between 0 and 1
                                 #' @param parameters list containing algorithm configuration
                                 #' @param param_requirements list containing all required parameters and possible values
                                 #' @param bounds num scalar or vector of 2 elements with group bounds
                                 #'
                                 #' @return A new object
                                 initialize = function(features,
+                                                      preferences,
                                                       parameters = NULL,
                                                       param_requirements,
                                                       bounds){
@@ -131,6 +147,11 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
                                             ncol(features) > 1,
                                             nrow(features) > 1)
                                   private$.features <- features
+
+                                  stopifnot(is.matrix(preferences) | is.null(preferences),
+                                            ncol(preferences) == nrow(private$.features),
+                                            nrow(preferences) == nrow(private$.features))
+                                  private$.preferences <- preferences
 
                                   stopifnot(is.null(parameters) | is.list(parameters))
                                   private$.check_params(parameters,
@@ -212,14 +233,16 @@ GroupAlgorithm <- R6::R6Class(classname = "GroupAlgorithm",
 #'
 #' @description Creates GroupAlgorithm object.
 #' @param features data.frame containing the grouping data
+#' @param preferencds matrix of preferences [NOT USED]
 #' @param parameters list containing algorithm parameters
 #' @param bounds num scalar or vector of 2 elements with bounds
 #'
 #' @return GroupAlgorithm object.
 #'
 #' @export
-group_algorithm <- function(features, parameters = NULL, bounds) {
+group_algorithm <- function(features, preferences = NULL, parameters = NULL, bounds) {
   GroupAlgorithm$new(features,
+                     preferences,
                      parameters,
                      .group_algorithm_param_requirements,
                      bounds)

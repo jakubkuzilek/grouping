@@ -55,14 +55,16 @@ RandomAlgorithm <- R6::R6Class(classname = "RandomAlgorithm",
 #'
 #' @description Creates RandomAlgorithm object.
 #' @param features data.frame containing the grouping data
+#' @param preferences matrix of preferences [NOT USED]
 #' @param parameters list containing algorithm parameters
 #' @param bounds num scalar or vector of 2 elements with bounds
 #'
 #' @return RandomAlgorithm object.
 #'
 #' @export
-random_algorithm <- function(features, parameters, bounds) {
+random_algorithm <- function(features, preferences = NULL, parameters, bounds) {
   RandomAlgorithm$new(features,
+                      preferences,
                       parameters,
                       .random_algorithm_param_requirements,
                       bounds)

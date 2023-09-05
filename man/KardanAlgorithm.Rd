@@ -22,17 +22,9 @@ Ahmad A. Kardan & Hamid Sadeghi (2016).
 \section{Super class}{
 \code{\link[grouping:GroupAlgorithm]{grouping::GroupAlgorithm}} -> \code{KardanAlgorithm}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{preferences}}{num matrix containing the preferences data}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-KardanAlgorithm-new}{\code{KardanAlgorithm$new()}}
 \item \href{#method-KardanAlgorithm-group}{\code{KardanAlgorithm$group()}}
 \item \href{#method-KardanAlgorithm-clone}{\code{KardanAlgorithm$clone()}}
 }
@@ -41,44 +33,11 @@ Ahmad A. Kardan & Hamid Sadeghi (2016).
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="grouping" data-topic="GroupAlgorithm" data-id="get_required_parameters"><a href='../../grouping/html/GroupAlgorithm.html#method-GroupAlgorithm-get_required_parameters'><code>grouping::GroupAlgorithm$get_required_parameters()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="grouping" data-topic="GroupAlgorithm" data-id="initialize"><a href='../../grouping/html/GroupAlgorithm.html#method-GroupAlgorithm-initialize'><code>grouping::GroupAlgorithm$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="grouping" data-topic="GroupAlgorithm" data-id="print"><a href='../../grouping/html/GroupAlgorithm.html#method-GroupAlgorithm-print'><code>grouping::GroupAlgorithm$print()</code></a></span></li>
 </ul>
 </details>
 }}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-KardanAlgorithm-new"></a>}}
-\if{latex}{\out{\hypertarget{method-KardanAlgorithm-new}{}}}
-\subsection{Method \code{new()}}{
-Create new object
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KardanAlgorithm$new(
-  features,
-  preferences,
-  parameters = NULL,
-  param_requirements,
-  bounds
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{features}}{data.frame containing grouping data}
-
-\item{\code{preferences}}{matrix containing student preferences}
-
-\item{\code{parameters}}{list containing algorithm configuration}
-
-\item{\code{param_requirements}}{list containing all required parameters and possible values}
-
-\item{\code{bounds}}{num scalar or vector of 2 elements with group bounds}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A new object
-}
-}
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-KardanAlgorithm-group"></a>}}
 \if{latex}{\out{\hypertarget{method-KardanAlgorithm-group}{}}}

@@ -4,7 +4,7 @@
 \alias{group_algorithm}
 \title{Constructor function for GroupAlgorithm R6 class.}
 \usage{
-group_algorithm(features, parameters = NULL, bounds)
+group_algorithm(features, preferences = NULL, parameters = NULL, bounds)
 }
 \arguments{
 \item{features}{data.frame containing the grouping data}
@@ -12,6 +12,8 @@ group_algorithm(features, parameters = NULL, bounds)
 \item{parameters}{list containing algorithm parameters}
 
 \item{bounds}{num scalar or vector of 2 elements with bounds}
+
+\item{preferencds}{matrix of preferences [NOT USED]}
 }
 \value{
 GroupAlgorithm object.
